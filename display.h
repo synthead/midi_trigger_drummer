@@ -8,7 +8,7 @@
 #define DISPLAY_LATCH1 4
 #define DISPLAY_LATCH2 5
 
-namespace ChannelDisplay {
+namespace Display {
   void setup();
   void display(uint8_t, uint8_t, bool, bool, bool);
   void displayHex(uint8_t, bool, bool, bool);

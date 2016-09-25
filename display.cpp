@@ -1,7 +1,7 @@
-#include "channel_display.h"
+#include "display.h"
 #include <Arduino.h>
 
-namespace ChannelDisplay {
+namespace Display {
   uint8_t characters[16] = {
       0b11000000, 0b11111001, 0b10100100, 0b10110000, 0b10011001, 0b10010010,
       0b10000010, 0b11111000, 0b10000000, 0b10010000, 0b10100000, 0b10000011,
