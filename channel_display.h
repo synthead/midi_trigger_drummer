@@ -10,9 +10,9 @@
 
 namespace ChannelDisplay {
   void setup();
-  void display(uint8_t, uint8_t, bool, bool);
-  void displayHex(uint8_t, bool, bool);
-  void displayDec(uint8_t, bool, bool);
+  void display(uint8_t, uint8_t, bool, bool, bool);
+  void displayHex(uint8_t, bool, bool, bool);
+  void displayDec(uint8_t, bool, bool, bool);
 }
 
 #endif
