@@ -12,6 +12,9 @@ namespace ChannelDisplay {
     pinMode(DISPLAY_CLK, OUTPUT);
     pinMode(DISPLAY_LATCH1, OUTPUT);
     pinMode(DISPLAY_LATCH2, OUTPUT);
+
+    digitalWrite(DISPLAY_LATCH1, HIGH);
+    digitalWrite(DISPLAY_LATCH2, HIGH);
   }
 
   void display(
