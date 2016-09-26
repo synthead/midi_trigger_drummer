@@ -4,6 +4,7 @@
 
 namespace MIDI {
   uint8_t channel = 0;
+  uint8_t first_key = MIDI_FIRST_KEY;
   uint8_t command_in = 0;
   int8_t key = -1;
 
@@ -28,9 +29,9 @@ namespace MIDI {
       } else {
         if (command_in == MIDI_NOTE_ON &&
             midi_data > 0x00 &&
-            key >= MIDI_FIRST_KEY &&
-            key < MIDI_FIRST_KEY + DRUM_TRIGGERS) {
-          DrumTriggers::hit(key - MIDI_FIRST_KEY);
+            key >= first_key &&
+            key < first_key + DRUM_TRIGGERS) {
+          DrumTriggers::hit(key - first_key);
         }
 
         key = -1;
@@ -43,6 +44,14 @@ namespace MIDI {
       channel = channel == 15 ? 0 : channel + 1;
     } else {
       channel = channel == 0 ? 15 : channel - 1;
+    }
+  }
+
+  void shift_first_key(bool up) {
+    if (up) {
+      first_key = first_key == 127 ? 0 : first_key + 1;
+    } else {
+      first_key = first_key == 0 ? 127 : first_key - 1;
     }
   }
 }

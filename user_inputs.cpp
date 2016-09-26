@@ -62,7 +62,8 @@ namespace UserInputs {
             menu = MENU_MIDI_CHANNEL;
             Display::display_midi_channel(menu_strobe_state);
           } else if (button_down_event) {
-            // menu = MENU_FIRST_KEY;
+            menu = MENU_MIDI_FIRST_KEY;
+            Display::display_midi_first_key(menu_strobe_state);
           }
           break;
 
@@ -71,8 +72,10 @@ namespace UserInputs {
           Display::display_midi_channel(menu_strobe_state);
           break;
 
-        // case MENU_FIRST_KEY:
-        //   break;
+        case MENU_MIDI_FIRST_KEY:
+          MIDI::shift_first_key(button_up_event);
+          Display::display_midi_first_key(menu_strobe_state);
+          break;
       }
 
       button_up_event = button_down_event = false;
@@ -93,8 +96,9 @@ namespace UserInputs {
             Display::display_midi_channel(menu_strobe_state);
             break;
 
-          // case MENU_FIRST_KEY:
-          //   break;
+          case MENU_MIDI_FIRST_KEY:
+            Display::display_midi_first_key(menu_strobe_state);
+            break;
         }
       }
     }

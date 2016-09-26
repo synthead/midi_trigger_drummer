@@ -14,10 +14,12 @@
 
 namespace MIDI {
   extern uint8_t channel;
+  extern uint8_t first_key;
 
   void setup();
   void process_messages();
   void shift_channel(bool);
+  void shift_first_key(bool);
 }
 
 #endif

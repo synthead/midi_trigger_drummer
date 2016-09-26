@@ -14,6 +14,7 @@ namespace Display {
   void display_hex(uint8_t, bool, bool, bool);
   void display_decimal(uint8_t, bool, bool, bool);
   void display_midi_channel(bool);
+  void display_midi_first_key(bool);
 }
 
 #endif
