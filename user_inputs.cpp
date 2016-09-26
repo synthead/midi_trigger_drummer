@@ -34,8 +34,8 @@ namespace UserInputs {
   }
 
   void process_user_inputs() {
-    bool button_right_state = digitalRead(BUTTON_LEFT_PIN);
-    bool button_left_state = digitalRead(BUTTON_RIGHT_PIN);
+    bool button_left_state = digitalRead(BUTTON_LEFT_PIN);
+    bool button_right_state = digitalRead(BUTTON_RIGHT_PIN);
 
     if (! last_button_right_state && button_right_state) {
       last_button_right_state = true;
@@ -58,10 +58,10 @@ namespace UserInputs {
     if (button_right_event || button_left_event) {
       switch (menu) {
         case MENU_NONE:
-          if (button_right_event) {
+          if (button_left_event) {
             menu = MENU_MIDI_CHANNEL;
             Display::display_midi_channel(menu_strobe_state);
-          } else if (button_left_event) {
+          } else if (button_right_event) {
             menu = MENU_MIDI_FIRST_KEY;
             Display::display_midi_first_key(menu_strobe_state);
           }
