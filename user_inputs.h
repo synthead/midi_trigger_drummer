@@ -1,8 +1,8 @@
 #ifndef USER_INPUTS_H
 #define USER_INPUTS_H
 
-#define BUTTON_UP_PIN 6
-#define BUTTON_DOWN_PIN 7
+#define BUTTON_LEFT_PIN 6
+#define BUTTON_RIGHT_PIN 7
 
 #define MENU_NONE 0
 #define MENU_MIDI_CHANNEL 1

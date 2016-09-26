@@ -4,13 +4,13 @@
 #include <Arduino.h>
 
 namespace UserInputs {
-  bool button_up_state;
-  bool last_button_up_state = false;
-  bool button_up_event = false;
+  bool button_right_state;
+  bool last_button_right_state = false;
+  bool button_right_event = false;
 
-  bool button_down_state;
-  bool last_button_down_state = false;
-  bool button_down_event = false;
+  bool button_left_state;
+  bool last_button_left_state = false;
+  bool button_left_event = false;
 
   uint8_t menu = MENU_NONE;
   unsigned long menu_expires_at;
@@ -19,8 +19,8 @@ namespace UserInputs {
   unsigned long menu_strobe_expires_at;
 
   void setup() {
-    pinMode(BUTTON_UP_PIN, INPUT);
-    pinMode(BUTTON_DOWN_PIN, INPUT);
+    pinMode(BUTTON_LEFT_PIN, INPUT);
+    pinMode(BUTTON_RIGHT_PIN, INPUT);
   }
 
   void set_menu_timeout() {
@@ -34,51 +34,51 @@ namespace UserInputs {
   }
 
   void process_user_inputs() {
-    bool button_up_state = digitalRead(BUTTON_UP_PIN);
-    bool button_down_state = digitalRead(BUTTON_DOWN_PIN);
+    bool button_right_state = digitalRead(BUTTON_LEFT_PIN);
+    bool button_left_state = digitalRead(BUTTON_RIGHT_PIN);
 
-    if (! last_button_up_state && button_up_state) {
-      last_button_up_state = true;
-      button_up_event = true;
-    } else if (last_button_up_state && ! button_up_state) {
-      last_button_up_state = false;
+    if (! last_button_right_state && button_right_state) {
+      last_button_right_state = true;
+      button_right_event = true;
+    } else if (last_button_right_state && ! button_right_state) {
+      last_button_right_state = false;
     }
 
-    if (! last_button_down_state && button_down_state) {
-      last_button_down_state = true;
-      button_down_event = true;
-    } else if (last_button_down_state && ! button_down_state) {
-      last_button_down_state = false;
+    if (! last_button_left_state && button_left_state) {
+      last_button_left_state = true;
+      button_left_event = true;
+    } else if (last_button_left_state && ! button_left_state) {
+      last_button_left_state = false;
     }
 
-    if (button_up_state || button_down_state) {
+    if (button_right_state || button_left_state) {
       set_menu_timeout();
     }
 
-    if (button_up_event || button_down_event) {
+    if (button_right_event || button_left_event) {
       switch (menu) {
         case MENU_NONE:
-          if (button_up_event) {
+          if (button_right_event) {
             menu = MENU_MIDI_CHANNEL;
             Display::display_midi_channel(menu_strobe_state);
-          } else if (button_down_event) {
+          } else if (button_left_event) {
             menu = MENU_MIDI_FIRST_KEY;
             Display::display_midi_first_key(menu_strobe_state);
           }
           break;
 
         case MENU_MIDI_CHANNEL:
-          MIDI::shift_channel(button_up_event);
+          MIDI::shift_channel(button_right_event);
           Display::display_midi_channel(menu_strobe_state);
           break;
 
         case MENU_MIDI_FIRST_KEY:
-          MIDI::shift_first_key(button_up_event);
+          MIDI::shift_first_key(button_right_event);
           Display::display_midi_first_key(menu_strobe_state);
           break;
       }
 
-      button_up_event = button_down_event = false;
+      button_right_event = button_left_event = false;
     }
 
     if (menu != MENU_NONE) {
