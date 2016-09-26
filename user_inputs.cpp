@@ -1,6 +1,7 @@
 #include "user_inputs.h"
 #include "midi.h"
 #include "display.h"
+#include "storage.h"
 #include <Arduino.h>
 
 namespace UserInputs {
@@ -88,6 +89,7 @@ namespace UserInputs {
 
       if (now >= menu_expires_at) {
         menu = MENU_NONE;
+        Storage::write_settings();
         Display::display_midi_channel(false);
       } else if (now >= menu_strobe_expires_at) {
         menu_strobe_state = ! menu_strobe_state;
