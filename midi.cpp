@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 namespace MIDI {
-  settings_struct settings {MIDI_DEFAULT_CHANNEL, MIDI_FIRST_KEY};
+  settings_struct settings {MIDI_CHANNEL_DEFAULT, MIDI_FIRST_KEY_DEFAULT};
   uint8_t command_in = 0;
   int8_t key = -1;
 
@@ -40,20 +40,24 @@ namespace MIDI {
 
   void shift_channel(bool up) {
     if (up) {
-      settings.channel = settings.channel == 15 ? 0 : settings.channel + 1;
+      settings.channel = settings.channel == MIDI_CHANNEL_MAX ?
+          0 :
+          settings.channel + 1;
     } else {
-      settings.channel = settings.channel == 0 ? 15 : settings.channel - 1;
+      settings.channel = settings.channel == 0 ?
+          MIDI_CHANNEL_MAX :
+          settings.channel - 1;
     }
   }
 
   void shift_first_key(bool up) {
     if (up) {
-      settings.first_key = settings.first_key == 127 ?
+      settings.first_key = settings.first_key == MIDI_FIRST_KEY_MAX ?
           0 :
           settings.first_key + 1;
     } else {
       settings.first_key = settings.first_key == 0 ?
-          127 :
+          MIDI_FIRST_KEY_MAX :
           settings.first_key - 1;
     }
   }
