@@ -23,6 +23,8 @@ namespace UserInputs {
 
   unsigned long button_repeat_expires_at;
 
+  MIDI::settings_struct last_midi_settings;
+
   void setup() {
     pinMode(BUTTON_LEFT_PIN, INPUT);
     pinMode(BUTTON_RIGHT_PIN, INPUT);
@@ -76,6 +78,8 @@ namespace UserInputs {
     if (button_right_event || button_left_event) {
       switch (menu) {
         case MENU_NONE:
+          last_midi_settings = MIDI::settings;
+
           if (button_left_event) {
             menu = MENU_MIDI_CHANNEL;
             Display::display_midi_channel(menu_strobe_state);
@@ -103,8 +107,12 @@ namespace UserInputs {
       now = millis();
 
       if (now >= menu_expires_at) {
+        if (MIDI::settings.channel != last_midi_settings.channel ||
+            MIDI::settings.first_key != last_midi_settings.first_key) {
+          Storage::write_settings();
+        }
+
         menu = MENU_NONE;
-        Storage::write_settings();
         Display::display_midi_channel(false);
       } else if (now >= menu_strobe_expires_at) {
         menu_strobe_state = ! menu_strobe_state;
