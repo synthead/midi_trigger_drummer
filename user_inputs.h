@@ -10,6 +10,8 @@
 
 #define MENU_TIMEOUT 5000
 #define MENU_STROBE_TIMEOUT 200
+#define MENU_BUTTON_REPEAT_TIMEOUT 500
+#define MENU_BUTTON_REPEAT_RATE 100
 
 namespace UserInputs {
   void setup();

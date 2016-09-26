@@ -21,6 +21,8 @@ namespace UserInputs {
   uint8_t menu_strobe_state;
   unsigned long menu_strobe_expires_at;
 
+  unsigned long button_repeat_expires_at;
+
   void setup() {
     pinMode(BUTTON_LEFT_PIN, INPUT);
     pinMode(BUTTON_RIGHT_PIN, INPUT);
@@ -36,6 +38,10 @@ namespace UserInputs {
     }
   }
 
+  void set_button_repeat_timeout() {
+    button_repeat_expires_at = millis() + MENU_BUTTON_REPEAT_TIMEOUT;
+  }
+
   void process_user_inputs() {
     button_left_state = digitalRead(BUTTON_LEFT_PIN);
     button_right_state = digitalRead(BUTTON_RIGHT_PIN);
@@ -43,6 +49,7 @@ namespace UserInputs {
     if (! last_button_right_state && button_right_state) {
       last_button_right_state = true;
       button_right_event = true;
+      set_button_repeat_timeout();
     } else if (last_button_right_state && ! button_right_state) {
       last_button_right_state = false;
     }
@@ -50,12 +57,20 @@ namespace UserInputs {
     if (! last_button_left_state && button_left_state) {
       last_button_left_state = true;
       button_left_event = true;
+      set_button_repeat_timeout();
     } else if (last_button_left_state && ! button_left_state) {
       last_button_left_state = false;
     }
 
     if (button_right_state || button_left_state) {
       set_menu_timeout();
+    }
+
+    if (millis() >= button_repeat_expires_at) {
+      button_repeat_expires_at += MENU_BUTTON_REPEAT_RATE;
+
+      button_left_event = button_left_state;
+      button_right_event = button_right_state;
     }
 
     if (button_right_event || button_left_event) {
