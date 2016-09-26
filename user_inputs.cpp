@@ -49,7 +49,7 @@ namespace UserInputs {
         case MENU_NONE:
           if (button_up_event) {
             menu = MENU_MIDI_CHANNEL;
-            Display::displayMidiChannel(MIDI_CHANNEL_EDIT_ON);
+            Display::display_midi_channel(MIDI_CHANNEL_EDIT_ON);
           } else if (button_down_event) {
             // menu = MENU_FIRST_KEY;
           }
@@ -57,7 +57,7 @@ namespace UserInputs {
 
         case MENU_MIDI_CHANNEL:
           MIDI::shift_channel(button_up_event);
-          Display::displayMidiChannel(MIDI_CHANNEL_EDIT_ON);
+          Display::display_midi_channel(MIDI_CHANNEL_EDIT_ON);
           break;
 
         // case MENU_FIRST_KEY:
@@ -72,7 +72,7 @@ namespace UserInputs {
         ! button_down_state &&
         millis() >= menu_expires_at) {
       menu = MENU_NONE;
-      Display::displayMidiChannel(MIDI_CHANNEL_EDIT_OFF);
+      Display::display_midi_channel(MIDI_CHANNEL_EDIT_OFF);
     }
   }
 }

@@ -11,9 +11,9 @@
 namespace Display {
   void setup();
   void display(uint8_t, uint8_t, bool, bool, bool);
-  void displayHex(uint8_t, bool, bool, bool);
-  void displayDec(uint8_t, bool, bool, bool);
-  void displayMidiChannel(bool);
+  void display_hex(uint8_t, bool, bool, bool);
+  void display_decimal(uint8_t, bool, bool, bool);
+  void display_midi_channel(bool);
 }
 
 #endif

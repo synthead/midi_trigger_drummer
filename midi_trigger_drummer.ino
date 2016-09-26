@@ -7,7 +7,7 @@ void setup() {
   MIDI::setup();
   DrumTriggers::setup();
   Display::setup();
-  Display::displayDec(MIDI::channel + 1, false, false, false);
+  Display::display_decimal(MIDI::channel + 1, false, false, false);
 }
 
 void loop() {

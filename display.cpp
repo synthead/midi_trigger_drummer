@@ -37,7 +37,7 @@ namespace Display {
     digitalWrite(DISPLAY_LATCH2, HIGH);
   }
 
-  void displayHex(
+  void display_hex(
       uint8_t character, bool decimal1, bool decimal2, bool leading_zero) {
     display(
         (character & 0xf0) >> 4,
@@ -47,7 +47,7 @@ namespace Display {
         leading_zero);
   }
 
-  void displayDec(
+  void display_decimal(
       uint8_t character, bool decimal1, bool decimal2, bool leading_zero) {
     display(
         character / 10,
@@ -57,7 +57,7 @@ namespace Display {
         leading_zero);
   }
 
-  void displayMidiChannel(bool edit) {
-    displayDec(MIDI::channel + 1, edit, false, false);
+  void display_midi_channel(bool edit) {
+    display_decimal(MIDI::channel + 1, edit, false, false);
   }
 }
