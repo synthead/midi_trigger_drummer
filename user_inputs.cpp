@@ -12,6 +12,8 @@ namespace UserInputs {
   bool last_button_left_state = false;
   bool button_left_event = false;
 
+  unsigned long now;
+
   uint8_t menu = MENU_NONE;
   unsigned long menu_expires_at;
 
@@ -24,7 +26,7 @@ namespace UserInputs {
   }
 
   void set_menu_timeout() {
-    unsigned long now = millis();
+    now = millis();
     menu_expires_at = now + MENU_TIMEOUT;
 
     if (menu == MENU_NONE) {
@@ -34,8 +36,8 @@ namespace UserInputs {
   }
 
   void process_user_inputs() {
-    bool button_left_state = digitalRead(BUTTON_LEFT_PIN);
-    bool button_right_state = digitalRead(BUTTON_RIGHT_PIN);
+    button_left_state = digitalRead(BUTTON_LEFT_PIN);
+    button_right_state = digitalRead(BUTTON_RIGHT_PIN);
 
     if (! last_button_right_state && button_right_state) {
       last_button_right_state = true;
@@ -82,7 +84,7 @@ namespace UserInputs {
     }
 
     if (menu != MENU_NONE) {
-      unsigned long now = millis();
+      now = millis();
 
       if (now >= menu_expires_at) {
         menu = MENU_NONE;
