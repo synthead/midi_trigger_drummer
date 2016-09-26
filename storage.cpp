@@ -11,9 +11,9 @@ namespace Storage {
       MIDI::settings.channel = MIDI_CHANNEL_DEFAULT;
       MIDI::settings.first_key = MIDI_FIRST_KEY_DEFAULT;
 
-      EEPROM.write(EEPROM_VALIDATION_LOCATION, EEPROM_VALIDATION_VALUE);
       write_midi_channel();
       write_midi_first_key();
+      EEPROM.write(EEPROM_VALIDATION_LOCATION, EEPROM_VALIDATION_VALUE);
     }
   }
 
