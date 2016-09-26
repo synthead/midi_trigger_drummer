@@ -12,9 +12,6 @@
 #define MIDI_KEYS 10
 #define MIDI_FIRST_KEY 60
 
-#define MIDI_CHANNEL_EDIT_OFF 0
-#define MIDI_CHANNEL_EDIT_ON 1
-
 namespace MIDI {
   extern uint8_t channel;
 

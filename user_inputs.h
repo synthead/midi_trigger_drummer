@@ -9,6 +9,7 @@
 #define MENU_FIRST_KEY 2
 
 #define MENU_TIMEOUT 5000
+#define MENU_STROBE_TIMEOUT 200
 
 namespace UserInputs {
   void setup();
