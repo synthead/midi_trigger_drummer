@@ -3,8 +3,7 @@
 #include <Arduino.h>
 
 namespace MIDI {
-  uint8_t channel = 0;
-  uint8_t first_key = MIDI_FIRST_KEY;
+  settings_struct settings {MIDI_DEFAULT_CHANNEL, MIDI_FIRST_KEY};
   uint8_t command_in = 0;
   int8_t key = -1;
 
@@ -19,8 +18,8 @@ namespace MIDI {
       if (midi_data >= MIDI_NOTE_OFF) {
         uint8_t received_channel = midi_data % 0x10;
 
-        command_in = received_channel == channel ?
-            command_in = midi_data - channel :
+        command_in = received_channel == settings.channel ?
+            command_in = midi_data - settings.channel :
             0;
       } else if (key == -1) {
         if (command_in == MIDI_NOTE_ON) {
@@ -29,9 +28,9 @@ namespace MIDI {
       } else {
         if (command_in == MIDI_NOTE_ON &&
             midi_data > 0x00 &&
-            key >= first_key &&
-            key < first_key + DRUM_TRIGGERS) {
-          DrumTriggers::hit(key - first_key);
+            key >= settings.first_key &&
+            key < settings.first_key + DRUM_TRIGGERS) {
+          DrumTriggers::hit(key - settings.first_key);
         }
 
         key = -1;
@@ -41,17 +40,21 @@ namespace MIDI {
 
   void shift_channel(bool up) {
     if (up) {
-      channel = channel == 15 ? 0 : channel + 1;
+      settings.channel = settings.channel == 15 ? 0 : settings.channel + 1;
     } else {
-      channel = channel == 0 ? 15 : channel - 1;
+      settings.channel = settings.channel == 0 ? 15 : settings.channel - 1;
     }
   }
 
   void shift_first_key(bool up) {
     if (up) {
-      first_key = first_key == 127 ? 0 : first_key + 1;
+      settings.first_key = settings.first_key == 127 ?
+          0 :
+          settings.first_key + 1;
     } else {
-      first_key = first_key == 0 ? 127 : first_key - 1;
+      settings.first_key = settings.first_key == 0 ?
+          127 :
+          settings.first_key - 1;
     }
   }
 }

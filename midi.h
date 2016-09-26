@@ -13,8 +13,12 @@
 #define MIDI_FIRST_KEY 60
 
 namespace MIDI {
-  extern uint8_t channel;
-  extern uint8_t first_key;
+  struct settings_struct {
+    uint8_t channel;
+    uint8_t first_key;
+  };
+
+  extern settings_struct settings;
 
   void setup();
   void process_messages();

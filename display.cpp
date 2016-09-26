@@ -58,10 +58,10 @@ namespace Display {
   }
 
   void display_midi_channel(bool edit) {
-    display_decimal(MIDI::channel + 1, edit, false, false);
+    display_decimal(MIDI::settings.channel + 1, edit, false, false);
   }
 
   void display_midi_first_key(bool edit) {
-    display_hex(MIDI::first_key, false, edit, true);
+    display_hex(MIDI::settings.first_key, false, edit, true);
   }
 }
