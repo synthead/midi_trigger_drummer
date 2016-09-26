@@ -107,9 +107,18 @@ namespace UserInputs {
       now = millis();
 
       if (now >= menu_expires_at) {
-        if (MIDI::settings.channel != last_midi_settings.channel ||
-            MIDI::settings.first_key != last_midi_settings.first_key) {
-          Storage::write_settings();
+        switch (menu) {
+          case MENU_MIDI_CHANNEL:
+            if (MIDI::settings.channel != last_midi_settings.channel) {
+              Storage::write_midi_channel();
+            }
+            break;
+
+          case MENU_MIDI_FIRST_KEY:
+            if (MIDI::settings.first_key != last_midi_settings.first_key) {
+              Storage::write_midi_first_key();
+            }
+            break;
         }
 
         menu = MENU_NONE;

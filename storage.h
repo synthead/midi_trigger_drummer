@@ -9,7 +9,8 @@
 
 namespace Storage {
   void read_settings();
-  void write_settings();
+  void write_midi_channel();
+  void write_midi_first_key();
 }
 
 #endif
