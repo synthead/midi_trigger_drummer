@@ -13,6 +13,7 @@ namespace Display {
   void display(uint8_t, uint8_t, bool, bool, bool);
   void displayHex(uint8_t, bool, bool, bool);
   void displayDec(uint8_t, bool, bool, bool);
+  void displayMidiChannel(bool);
 }
 
 #endif

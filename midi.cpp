@@ -37,4 +37,12 @@ namespace MIDI {
       }
     }
   }
+
+  void shift_channel(bool up) {
+    if (up) {
+      channel = channel == 15 ? 0 : channel + 1;
+    } else {
+      channel = channel == 0 ? 15 : channel - 1;
+    }
+  }
 }

@@ -1,4 +1,5 @@
 #include "display.h"
+#include "midi.h"
 #include <Arduino.h>
 
 namespace Display {
@@ -54,5 +55,9 @@ namespace Display {
         decimal1,
         decimal2,
         leading_zero);
+  }
+
+  void displayMidiChannel(bool edit) {
+    displayDec(MIDI::channel + 1, edit, false, false);
   }
 }
