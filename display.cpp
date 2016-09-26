@@ -11,11 +11,9 @@ namespace Display {
   void setup() {
     pinMode(DISPLAY_DATA, OUTPUT);
     pinMode(DISPLAY_CLK, OUTPUT);
-    pinMode(DISPLAY_LATCH1, OUTPUT);
-    pinMode(DISPLAY_LATCH2, OUTPUT);
+    pinMode(DISPLAY_LATCH, OUTPUT);
 
-    digitalWrite(DISPLAY_LATCH1, HIGH);
-    digitalWrite(DISPLAY_LATCH2, HIGH);
+    digitalWrite(DISPLAY_LATCH, HIGH);
   }
 
   void display(
@@ -25,16 +23,15 @@ namespace Display {
         0b11111111 :
         characters[character1];
 
-    digitalWrite(DISPLAY_LATCH1, LOW);
+    digitalWrite(DISPLAY_LATCH, LOW);
+
     shiftOut(
         DISPLAY_DATA, DISPLAY_CLK, MSBFIRST, data1 - 0b10000000 * decimal1);
-    digitalWrite(DISPLAY_LATCH1, HIGH);
-
-    digitalWrite(DISPLAY_LATCH2, LOW);
     shiftOut(
         DISPLAY_DATA, DISPLAY_CLK, MSBFIRST,
         characters[character2] - 0b10000000 * decimal2);
-    digitalWrite(DISPLAY_LATCH2, HIGH);
+
+    digitalWrite(DISPLAY_LATCH, HIGH);
   }
 
   void display_hex(
